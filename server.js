@@ -57,7 +57,7 @@ var server = app.listen(app.get('port'), function () {  //http server listen
 
 //setup app inisghts and send data there
 var appInsights = require("applicationinsights");
-appInsights.setup(process.env.AppInsightsKey).start();
+appInsights.setup().start();
 
 //ouput to console
 console.log('Example app listening at http://%s:%s', host, port);
