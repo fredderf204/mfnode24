@@ -47,6 +47,10 @@ app.get('/', function (req, res) {
     });
   });
 
+//setup app inisghts and send data there
+var appInsights = require("applicationinsights");
+appInsights.setup().start();
+
 //set environment variables for azure
 app.set('port', process.env.PORT || 8080);
 
@@ -54,10 +58,6 @@ app.set('port', process.env.PORT || 8080);
 var server = app.listen(app.get('port'), function () {  //http server listen
   var host = server.address().address;
   var port = server.address().port;
-
-//setup app inisghts and send data there
-var appInsights = require("applicationinsights");
-appInsights.setup().start();
 
 //ouput to console
 console.log('Example app listening at http://%s:%s', host, port);
