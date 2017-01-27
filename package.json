@@ -25,6 +25,7 @@
     "grunt-mocha-test": "^0.13.2",
     "grunt-nsp": "^2.3.1",
     "jshint": "^2.9.2",
-    "mocha": "^3.1.0"
+    "mocha": "^3.1.0",
+    "nightwatch": "^0.9.12"
   }
 }
