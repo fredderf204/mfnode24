@@ -19,7 +19,7 @@ node {
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '279c4df1-1311-4eb6-ac13-161c67993e2e', passwordVariable: 'spp', usernameVariable: 'spu'],[$class: 'UsernamePasswordMultiBinding', credentialsId: '9cc01334-ddd8-4318-a1c2-424f11c25240', passwordVariable: 'gp', usernameVariable: 'gu']]) {
             withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
                 sh '''set +x
-                webappname="mfignite${JOB_NAME//\/}"
+                webappname="mfignitedemo4${BRANCH_NAME}"
                 echo $webappname
                 armtemplate=https://raw.githubusercontent.com/fredderf204/ARMTemplates/master/webapp_localgit_slot_appinsights/azuredeploy.json
                 azure login -u "$spu" -p "$spp" --service-principal --tenant "mfriedrich.cloud" -v
@@ -52,7 +52,7 @@ node {
             withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
                 sh '''set +x
                 rm -r /var/jenkins_home/.azure
-                webapptoswap="mfignite${JOB_NAME//\/}"
+                webapptoswap="mfignitedemo4${BRANCH_NAME}"
                 azure login -u "$asmu" -p "$asmp"
                 azure config mode asm
                 echo $webapptoswap
