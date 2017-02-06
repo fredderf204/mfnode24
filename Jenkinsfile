@@ -20,6 +20,7 @@ node {
             withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
                 sh '''set +x
                 webappname="mfignite${JOB_NAME}${BRANCH_NAME}"
+                echo $webappname
                 armtemplate=https://raw.githubusercontent.com/fredderf204/ARMTemplates/master/webapp_localgit_slot_appinsights/azuredeploy.json
                 azure login -u "$spu" -p "$spp" --service-principal --tenant "mfriedrich.cloud" -v
                 azure config mode arm
