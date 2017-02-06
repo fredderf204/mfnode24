@@ -1,7 +1,7 @@
 #!groovy
 node {
    stage('source'){
-       checkout scm
+       git checkout master
    }
     withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
         stage('local build'){
@@ -31,7 +31,7 @@ node {
                 giturl="https://$gu:$gp@$webappname-staging.scm.azurewebsites.net:443/$webappname.git"
                 azuregitremote="azure-$webappname${BUILD_NUMBER}"
                 git remote add "$azuregitremote" $giturl
-                git push "$azuregitremote" HEAD:master'''
+                git push "$azuregitremote" master'''
             }    
         }
    }    
