@@ -29,7 +29,7 @@ node {
                 sleep 20s
                 giturl="https://$gu:$gp@$webappname-staging.scm.azurewebsites.net:443/$webappname.git"
                 azuregitremote="azure-$webappname${BUILD_NUMBER}"
-                git remote add "azure-$webappname" $giturl
+                git remote add "$azuregitremote" $giturl
                 git push "azure-$webappname" master'''
             }    
         }
