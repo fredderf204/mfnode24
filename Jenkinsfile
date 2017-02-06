@@ -26,11 +26,11 @@ node {
                 azure config mode arm
                 azure group create -n $webappname -l "australia east"
                 azure group deployment create --template-uri $armtemplate -g $webappname -n "$webappname" -p {\\"appServicePlanName\\":{\\"value\\":\\"$webappname\\"},\\"webappname\\":{\\"value\\":\\"$webappname\\"},\\"slotName\\":{\\"value\\":\\"staging\\"}}
-                sleep 20s
+                sleep 5s
                 giturl="https://$gu:$gp@$webappname-staging.scm.azurewebsites.net:443/$webappname.git"
                 azuregitremote="azure-$webappname${BUILD_NUMBER}"
                 git remote add "$azuregitremote" $giturl
-                git push "$azuregitremote" master'''
+                git push "$azuregitremote"'''
             }    
         }
    }    
