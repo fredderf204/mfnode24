@@ -1,7 +1,7 @@
 #!groovy
 node {
    stage('source'){
-       git checkout master
+       git checkout ${BRANCH_NAME}
    }
     withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
         stage('local build'){
