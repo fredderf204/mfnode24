@@ -42,7 +42,7 @@ node {
                 }    
             }
             timeout(time:30, unit:'MINUTES') {
-                input message:'Approve deployment?'
+                input message:'Yo, do you approve this here deployment?'
             }
         }
     }
