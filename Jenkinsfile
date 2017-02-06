@@ -31,7 +31,7 @@ node {
                 giturl="https://$gu:$gp@$webappname-staging.scm.azurewebsites.net:443/$webappname.git"
                 azuregitremote="azure-$webappname${BUILD_NUMBER}"
                 git remote add "$azuregitremote" $giturl
-                git push "$azuregitremote" HEAD:master'''
+                git push "$azuregitremote" origin/master:master'''
             }    
         }
    }    
