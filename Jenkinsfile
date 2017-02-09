@@ -6,7 +6,8 @@ node {
         branches: scm.branches,
         extensions: scm.extensions + [[$class: 'CloneOption']],
         userRemoteConfigs: scm.userRemoteConfigs
-    ])
+        ])
+        sh 'git checkout master'
    }
     withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
         stage('local build'){
@@ -39,7 +40,7 @@ node {
                 azuregitremote="azure-$webappname${BUILD_NUMBER}"
                 git remote add "$azuregitremote" $giturl
                 git branch -a
-                git push -f "$azuregitremote" refs/remotes/origin/master'''
+                git push -f "$azuregitremote" master'''
             }    
         }
    }    
