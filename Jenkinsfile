@@ -33,6 +33,8 @@ node {
                 giturl="https://$gu:$gp@$webappname-staging.scm.azurewebsites.net:443/$webappname.git"
                 azuregitremote="azure-$webappname${BUILD_NUMBER}"
                 git remote add "$azuregitremote" $giturl
+                git add .
+                git commit -m 'azure deploy'
                 git push -f "$azuregitremote" refs/remotes/origin/master'''
             }    
         }
