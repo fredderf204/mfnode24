@@ -31,12 +31,8 @@ node {
                 sleep 5s
                 git status
                 giturl="https://$gu:$gp@$webappname-staging.scm.azurewebsites.net:443/$webappname.git"
-                git config user.email 'fred_derf204@hotmail.com'
-                git config user.name 'Jenkins Demo 4'
                 azuregitremote="azure-$webappname${BUILD_NUMBER}"
                 git remote add "$azuregitremote" $giturl
-                git add .
-                git commit -m 'azure deploy'
                 git push -f "$azuregitremote" refs/remotes/origin/master'''
             }    
         }
