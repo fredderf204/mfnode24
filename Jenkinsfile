@@ -8,6 +8,7 @@ node {
         userRemoteConfigs: scm.userRemoteConfigs
         ])
         sh 'git checkout master'
+        sh 'git pull'
    }
     withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
         stage('local build'){
