@@ -1,12 +1,6 @@
 #!groovy
 node {
    stage('source'){
-        checkout([
-        $class: 'GitSCM',
-        branches: scm.branches,
-        extensions: scm.extensions + [[$class: 'CloneOption']],
-        userRemoteConfigs: scm.userRemoteConfigs
-        ])
         sh 'git checkout master'
         sh 'git pull'
    }
@@ -20,8 +14,6 @@ node {
     withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
         stage('local test'){
             sh './node_modules/.bin/grunt --force'
-            sh 'git status'
-            sh 'git show-ref'
         }
     }    
    stage('build'){
@@ -36,11 +28,9 @@ node {
                 azure group create -n $webappname -l "australia east"
                 azure group deployment create --template-uri $armtemplate -g $webappname -n "$webappname" -p {\\"appServicePlanName\\":{\\"value\\":\\"$webappname\\"},\\"webappname\\":{\\"value\\":\\"$webappname\\"},\\"slotName\\":{\\"value\\":\\"staging\\"}}
                 sleep 5s
-                git status
                 giturl="https://$gu:$gp@$webappname-staging.scm.azurewebsites.net:443/$webappname.git"
                 azuregitremote="azure-$webappname${BUILD_NUMBER}"
                 git remote add "$azuregitremote" $giturl
-                git branch -a
                 git push -f "$azuregitremote" master'''
             }    
         }
