@@ -1,7 +1,12 @@
 #!groovy
 node {
    stage('source'){
-       checkout scm
+        checkout([
+        $class: 'GitSCM',
+        branches: scm.branches,
+        extensions: scm.extensions + [[$class: 'CleanCheckout']],
+        userRemoteConfigs: scm.userRemoteConfigs
+    ])
    }
     withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
         stage('local build'){
