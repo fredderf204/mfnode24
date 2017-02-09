@@ -28,7 +28,7 @@ node {
                 sh '''set +x
                 webappname="mfignitedemo4${BRANCH_NAME}"
                 echo $webappname
-                armtemplate=https://raw.githubusercontent.com/fredderf204/ARMTemplates/master/webapp_slot_appinsights/azuredeploy.json
+                armtemplate=https://raw.githubusercontent.com/fredderf204/ARMTemplates/master/webapp_localgit_slot_appinsights/azuredeploy.json
                 azure login -u "$spu" -p "$spp" --service-principal --tenant "mfriedrich.cloud" -v
                 azure config mode arm
                 azure group create -n $webappname -l "australia east"
