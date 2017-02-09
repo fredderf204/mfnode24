@@ -13,6 +13,8 @@ node {
     withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
         stage('local test'){
             sh './node_modules/.bin/grunt --force'
+            sh 'git status'
+            sh 'git show-ref'
         }
     }    
    stage('build'){
