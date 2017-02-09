@@ -4,7 +4,7 @@ node {
         checkout([
         $class: 'GitSCM',
         branches: scm.branches,
-        extensions: scm.extensions + [[$class: 'CleanCheckout']],
+        extensions: scm.extensions + [[$class: 'CloneOption']],
         userRemoteConfigs: scm.userRemoteConfigs
     ])
    }
