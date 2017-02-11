@@ -66,7 +66,7 @@ node {
         }    
    }
    stage('merge'){
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '9ebf2fe0-9009-423a-97e8-b4f10ecfa7e4', passwordVariable: 'ghp', usernameVariable: 'ghu']]) {
+        withCredentials([string(credentialsId: 'f6e625e2-1f18-437f-ba7f-f89b642a00e9', variable: 'ghoa')]) {
             timeout(time:30, unit:'MINUTES') {
                 input message:'Yo, do you approve this here deployment again?'
             }       
@@ -74,7 +74,7 @@ node {
         git fetch
         git checkout origin/master
         git merge ${BRANCH_NAME}
-        git remote add origin "https://$ghu:$ghp@github.com/fredderf204/mfnode24/project.git"
+        git remote set-url origin "https://$ghoa@github.com/fredderf204/mfnode24/project.git"
         git push origin HEAD:master
         git branch -d ${BRANCH_NAME}'''
         }
