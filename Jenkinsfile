@@ -66,15 +66,18 @@ node {
         }    
    }
    stage('merge'){
-        timeout(time:30, unit:'MINUTES') {
-            input message:'Yo, do you approve this here deployment again?'
-        }       
-       sh '''set +x
-       git fetch
-       git checkout origin/master
-       git merge ${BRANCH_NAME}
-       git push origin HEAD:master
-       git branch -d ${BRANCH_NAME}'''
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '9ebf2fe0-9009-423a-97e8-b4f10ecfa7e4', passwordVariable: 'ghp', usernameVariable: 'ghu']]) {
+            timeout(time:30, unit:'MINUTES') {
+                input message:'Yo, do you approve this here deployment again?'
+            }       
+        sh '''set +x
+        git fetch
+        git checkout origin/master
+        git merge ${BRANCH_NAME}
+        git remote add origin "https://$ghu:@ghp@github.com/fredderf204/mfnode24/project.git"
+        git push origin HEAD:master
+        git branch -d ${BRANCH_NAME}'''
+        }
    }
    stage('clean-up'){
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '279c4df1-1311-4eb6-ac13-161c67993e2e', passwordVariable: 'spp', usernameVariable: 'spu'],[$class: 'UsernamePasswordMultiBinding', credentialsId: '9cc01334-ddd8-4318-a1c2-424f11c25240', passwordVariable: 'gp', usernameVariable: 'gu']]) {
