@@ -1,7 +1,7 @@
 #!groovy
 node {
    stage('source'){
-        //sh 'git checkout ${BRANCH_NAME}'
+        sh 'git checkout "origin/${BRANCH_NAME}"'
         sh 'git pull'
         sh 'git config --global merge.ours.driver true'
    }
