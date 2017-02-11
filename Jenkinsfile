@@ -3,7 +3,7 @@ node {
    stage('source'){
         checkout scm
         sh 'git checkout ${BRANCH_NAME}'
-        sh 'git pull'
+        sh 'git pull origin/${BRANCH_NAME} '
         sh 'git config --global merge.ours.driver true'
    }
     withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
