@@ -73,7 +73,7 @@ node {
        git fetch
        git checkout origin/master
        git merge ${BRANCH_NAME}
-       git push
+       git push origin HEAD:master
        git branch -d ${BRANCH_NAME}'''
    }
    stage('clean-up'){
