@@ -3,6 +3,7 @@ node {
    stage('source'){
         sh 'git checkout master'
         sh 'git pull'
+        sh 'git config --global merge.ours.driver true'
    }
     withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
         stage('local build'){
