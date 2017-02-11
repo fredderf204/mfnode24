@@ -74,7 +74,7 @@ node {
         git fetch
         git checkout origin/master
         git merge ${BRANCH_NAME}
-        git remote origin rm
+        git remote remove origin
         git remote add origin "https://$ghoa@github.com/fredderf204/mfnode24/project.git"
         git push origin HEAD:master
         git branch -d ${BRANCH_NAME}'''
