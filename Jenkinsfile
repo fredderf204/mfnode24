@@ -71,7 +71,7 @@ node {
         }       
        sh '''set +x
        git fetch
-       git checkout master
+       git checkout origin/master
        git merge ${BRANCH_NAME}
        git push
        git branch -d ${BRANCH_NAME}'''
