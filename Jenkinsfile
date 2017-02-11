@@ -73,7 +73,7 @@ node {
         sh '''set +x
         git fetch
         git checkout origin/master
-        git pull
+        git pull origin/master
         git merge ${BRANCH_NAME}
         git remote remove origin
         git remote add origin "https://$ghoa@github.com/fredderf204/mfnode24/project.git"
