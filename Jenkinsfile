@@ -66,7 +66,11 @@ node {
         }    
    }
    stage('merge'){
+        timeout(time:30, unit:'MINUTES') {
+            input message:'Yo, do you approve this here deployment again?'
+        }       
        sh '''set +x
+       git fetch
        git checkout master
        git merge ${BRANCH_NAME}
        git push
