@@ -1,7 +1,7 @@
 #!groovy
 node {
    stage('source'){
-        scm checkout
+        checkout scm
         sh 'git checkout ${BRANCH_NAME}'
         sh 'git pull'
         sh 'git config --global merge.ours.driver true'
