@@ -34,7 +34,7 @@ node {
                 azuregitremote="azure-$webappname${BUILD_NUMBER}"
                 git remote add "$azuregitremote" $giturl
                 git status
-                git push -f "$azuregitremote" ${BRANCH_NAME}'''
+                git push -f "$azuregitremote" ${BRANCH_NAME}:master'''
             }    
         }
    }    
