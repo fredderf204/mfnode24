@@ -1,7 +1,7 @@
 #!groovy
 node {
    stage('source'){
-        sh 'git checkout master'
+        sh 'git checkout ${BRANCH_NAME}'
         sh 'git pull'
         sh 'git config --global merge.ours.driver true'
    }
@@ -61,6 +61,25 @@ node {
                 echo $webapptoswap
                 azure site swap -q $webapptoswap'''
             }
+        }    
+   }
+   stage('merge'){
+       sh '''set +x
+       git checkout master
+       git merge ${BRANCH_NAME}
+       git push
+       git branch -d ${BRANCH_NAME}'''
+   }
+   stage('clean-up'){
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '279c4df1-1311-4eb6-ac13-161c67993e2e', passwordVariable: 'spp', usernameVariable: 'spu'],[$class: 'UsernamePasswordMultiBinding', credentialsId: '9cc01334-ddd8-4318-a1c2-424f11c25240', passwordVariable: 'gp', usernameVariable: 'gu']]) {
+            withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
+                webappname="mfignitedemo4${BRANCH_NAME}"
+                echo $webappname
+                sh '''set +x
+                azure login -u "$spu" -p "$spp" --service-principal --tenant "mfriedrich.cloud" -v
+                azure config mode arm
+                azure group delete -n $webappname -q'''
+                }
         }    
    }
 }
