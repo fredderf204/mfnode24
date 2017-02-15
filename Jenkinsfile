@@ -1,7 +1,8 @@
 #!groovy
 node {
    stage('source'){
-        sh 'git checkout master'
+        checkout scm
+        sh 'git checkout ${BRANCH_NAME}'
         sh 'git pull'
         sh 'git config --global merge.ours.driver true'
    }
@@ -32,7 +33,8 @@ node {
                 giturl="https://$gu:$gp@$webappname-staging.scm.azurewebsites.net:443/$webappname.git"
                 azuregitremote="azure-$webappname${BUILD_NUMBER}"
                 git remote add "$azuregitremote" $giturl
-                git push -f "$azuregitremote" master'''
+                git status
+                git push -f "$azuregitremote" ${BRANCH_NAME}:master'''
             }    
         }
    }    
@@ -61,6 +63,33 @@ node {
                 echo $webapptoswap
                 azure site swap -q $webapptoswap'''
             }
+        }    
+   }
+   stage('merge'){
+        withCredentials([string(credentialsId: 'f6e625e2-1f18-437f-ba7f-f89b642a00e9', variable: 'ghoa')]) {
+            timeout(time:30, unit:'MINUTES') {
+                input message:'Yo, do you approve this here deployment again?'
+            }       
+        sh '''set +x
+        git fetch
+        git checkout origin/master
+        git merge ${BRANCH_NAME}
+        git remote remove origin
+        git remote add origin "https://$ghoa@github.com/fredderf204/mfnode24.git"
+        git push origin HEAD:master
+        git branch -d ${BRANCH_NAME}'''
+        }
+   }
+   stage('clean-up'){
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '279c4df1-1311-4eb6-ac13-161c67993e2e', passwordVariable: 'spp', usernameVariable: 'spu'],[$class: 'UsernamePasswordMultiBinding', credentialsId: '9cc01334-ddd8-4318-a1c2-424f11c25240', passwordVariable: 'gp', usernameVariable: 'gu']]) {
+            withEnv(["PATH+NODE=${tool name: '6.6.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
+                sh '''set +x
+                webappname="mfignitedemo4${BRANCH_NAME}"
+                echo $webappname
+                azure login -u "$spu" -p "$spp" --service-principal --tenant "mfriedrich.cloud" -v
+                azure config mode arm
+                azure group delete -n $webappname -q'''
+                }
         }    
    }
 }
