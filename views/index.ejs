@@ -1,90 +1,121 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Example App</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <style>
-    body{text-align: center;}
-    h2{font-family: PT Sans}
-		
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Example App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script type="text/javascript">
+    var appInsights = window.appInsights || function (a) {
+      function b(a) { c[a] = function () { var b = arguments; c.queue.push(function () { c[a].apply(c, b) }) } } var c = { config: a }, d = document, e = window; setTimeout(function () { var b = d.createElement("script"); b.src = a.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js", d.getElementsByTagName("script")[0].parentNode.appendChild(b) }); try { c.cookie = d.cookie } catch (a) { } c.queue = []; for (var f = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; f.length;)b("track" + f.pop()); if (b("setAuthenticatedUserContext"), b("clearAuthenticatedUserContext"), b("startTrackEvent"), b("stopTrackEvent"), b("startTrackPage"), b("stopTrackPage"), b("flush"), !a.disableExceptionTracking) { f = "onerror", b("_" + f); var g = e[f]; e[f] = function (a, b, d, e, h) { var i = g && g(a, b, d, e, h); return !0 !== i && c["_" + f](a, b, d, e, h), i } } return c
+    }({
+      instrumentationKey: "c375c51d-326f-4491-8c98-5f950a9e85c3"
+    });
+
+    window.appInsights = appInsights, appInsights.queue && 0 === appInsights.queue.length && appInsights.trackPageView();
+  </script>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    h2 {
+      font-family: PT Sans
+    }
+
     #table {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    width: 50%;
-    border-collapse: collapse;
-		align: center;
-		}
-		
-    #table td, #table th {
-    font-size: 1.4em;
-    border: 1px solid #FFA500;
-    padding: 3px 7px 2px 7px;
-		}
-		
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      width: 50%;
+      border-collapse: collapse;
+      align: center;
+    }
+
+    #table td,
     #table th {
-    font-size: 1.5em;
-    text-align: center;
-    padding-top: 5px;
-    padding-bottom: 4px;
-    background-color: #FFA500;
-    color: #ffffff;
-		}
-		
+      font-size: 1.4em;
+      border: 1px solid #FFA500;
+      padding: 3px 7px 2px 7px;
+    }
+
+    #table th {
+      font-size: 1.5em;
+      text-align: center;
+      padding-top: 5px;
+      padding-bottom: 4px;
+      background-color: #FFA500;
+      color: #ffffff;
+    }
+
     #table tr.alt td {
-    color: #000000;
-    background-color: #FFEDCC;
-		}
-     
+      color: #000000;
+      background-color: #FFEDCC;
+    }
+
     #footer {
-    hori-align: bottom;
-     }
-     
-    </style>
+      hori-align: bottom;
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="section">
-<table align="center" id="table">
-<tr>
-    <th>Key</th>
-    <th>Value</th>
-  </tr>
-<tr>
-	<td>Sitename</td>
-	<td><%= sitename %></td>
-</tr>
-<tr class="alt">
-	<td>Region</td>
-	<td><%= region %></td>
-</tr>
-<tr>
-	<td>Hostname</td>
-	<td><%= hostname %></td>
-</tr>
-<tr class="alt">
-	<td>Slot Name</td>
-	<td><%= slotname %></td>
-</tr>
-<tr>
-	<td>OS Type</td>
-	<td><%= ostype %></td>
-</tr>
-<tr class="alt">
-	<td>App Service Plan Tier</td>
-	<td><%= websku %></td>
-</tr>
-<tr>
-	<td>SCM</td>
-	<td><%= scmtype %></td>
-</tr>
-</div>
+  <div id="section">
+    <table align="center" id="table">
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Sitename</td>
+        <td>
+          <%= sitename %>
+        </td>
+      </tr>
+      <tr class="alt">
+        <td>Region</td>
+        <td>
+          <%= region %>
+        </td>
+      </tr>
+      <tr>
+        <td>Hostname</td>
+        <td>
+          <%= hostname %>
+        </td>
+      </tr>
+      <tr class="alt">
+        <td>Slot Name</td>
+        <td>
+          <%= slotname %>
+        </td>
+      </tr>
+      <tr>
+        <td>OS Type</td>
+        <td>
+          <%= ostype %>
+        </td>
+      </tr>
+      <tr class="alt">
+        <td>App Service Plan Tier</td>
+        <td>
+          <%= websku %>
+        </td>
+      </tr>
+      <tr>
+        <td>SCM</td>
+        <td>
+          <%= scmtype %>
+        </td>
+      </tr>
+  </div>
 
-<div id="footer">
-<img src="azure.png" alt="azure" style="width:400px;height:300px;">
-</footer>
+  <div id="footer">
+    <img src="azure.png" alt="azure" style="width:400px;height:300px;">
+    </footer>
 
 </body>
+
 </html>
